@@ -26,6 +26,8 @@ download_node() {
   else
     info "Using cached node ${node_version}..."
   fi
+
+  info "Finished retrieving node..."
 }
 
 cleanup_old_node() {
