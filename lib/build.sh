@@ -22,7 +22,7 @@ download_node() {
 
   if [ ! -f ${cached_node} ]; then
     info "Downloading node ${node_version}..."
-    curl_status=curl -s ${node_url} -o ${cached_node}
+    curl_status=$(curl -s ${node_url} -o ${cached_node})
     info "Curl status ${curl_status}"
   else
     info "Using cached node ${node_version}..."
