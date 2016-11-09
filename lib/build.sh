@@ -98,10 +98,10 @@ install_and_cache_npm_deps() {
   npm prune | indent
   info "Installing..."
   npm install --quiet --unsafe-perm --userconfig $build_dir/npmrc 2>&1 | indent
-  info "Post install ls..."
-  info $(ls .)
   info "Post install ls build_dir..."
   info $(ls $build_dir)
+  info "Post install ls..."
+  info $(ls .)
   info "Rebuilding..."
   npm rebuild 2>&1 | indent
   info "More pruning..."
