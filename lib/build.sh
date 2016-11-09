@@ -86,7 +86,9 @@ install_npm() {
 install_and_cache_npm_deps() {
   info "Installing and caching node modules"
   cd $phoenix_dir
+  info "Phoenix dir: $phoenix_dir"
   if [ -d $cache_dir/node_modules ]; then
+    info "Making cached node_modules..."
     mkdir -p node_modules
     cp -r $cache_dir/node_modules/* node_modules/
   fi
@@ -95,6 +97,10 @@ install_and_cache_npm_deps() {
   npm prune | indent
   info "Installing..."
   npm install --quiet --unsafe-perm --userconfig $build_dir/npmrc 2>&1 | indent
+  info "Post install ls..."
+  info $(ls $build_dir)
+  info "Post install ls build_dir..."
+  info $(ls .)
   info "Rebuilding..."
   npm rebuild 2>&1 | indent
   info "More pruning..."
