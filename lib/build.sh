@@ -100,7 +100,7 @@ install_and_cache_npm_deps() {
   info "More pruning..."
   npm --unsafe-perm prune 2>&1 | indent
   info "Copying..."
-  info ${echo ls .}
+  info $(ls .)
   cp -r node_modules $cache_dir
   info "Setting PATH..."
   PATH=$phoenix_dir/node_modules/.bin:$PATH
