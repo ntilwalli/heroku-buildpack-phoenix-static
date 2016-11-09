@@ -57,10 +57,14 @@ install_node() {
     echo "       Please remove any prior buildpack that installs Node."
     exit 1
   else
+    info "Making node_dir..."
     mkdir -p $node_dir
     # Move node (and npm) into .heroku/node and make them executable
+    info "Moving node_dir..."
     mv /tmp/node-v$node_version-linux-x64/* $node_dir
+    info "Chmodding node_dir..."
     chmod +x $node_dir/bin/*
+    info "Setting path for node..."
     PATH=$node_dir/bin:$PATH
   fi
 }
