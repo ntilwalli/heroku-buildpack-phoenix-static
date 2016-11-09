@@ -87,6 +87,7 @@ install_and_cache_npm_deps() {
   info "Installing and caching node modules"
   cd $phoenix_dir
   info "Phoenix dir: $phoenix_dir"
+  info "Working dir: $(pwd)"
   if [ -d $cache_dir/node_modules ]; then
     info "Making cached node_modules..."
     mkdir -p node_modules
@@ -98,16 +99,16 @@ install_and_cache_npm_deps() {
   info "Installing..."
   npm install --quiet --unsafe-perm --userconfig $build_dir/npmrc 2>&1 | indent
   info "Post install ls..."
-  info $(ls $build_dir)
-  info "Post install ls build_dir..."
   info $(ls .)
+  info "Post install ls build_dir..."
+  info $(ls $build_dir)
   info "Rebuilding..."
   npm rebuild 2>&1 | indent
   info "More pruning..."
   npm --unsafe-perm prune 2>&1 | indent
   info "Copying..."
   info $(ls .)
-  cp -r node_modules $cache_dir
+  cp -r $build_dir/node_modules $cache_dir
   info "Setting PATH..."
   PATH=$phoenix_dir/node_modules/.bin:$PATH
   info "Installing bower deps..."
