@@ -91,12 +91,19 @@ install_and_cache_npm_deps() {
     cp -r $cache_dir/node_modules/* node_modules/
   fi
 
+  info "Pruning..."
   npm prune | indent
+  info "Installing..."
   npm install --quiet --unsafe-perm --userconfig $build_dir/npmrc 2>&1 | indent
+  info "Rebuilding..."
   npm rebuild 2>&1 | indent
+  info "More pruning..."
   npm --unsafe-perm prune 2>&1 | indent
+  info "Copying..."
   cp -r node_modules $cache_dir
+  info "Setting PATH..."
   PATH=$phoenix_dir/node_modules/.bin:$PATH
+  info "Installing bower deps..."
   install_bower_deps
 }
 
